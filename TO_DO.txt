@@ -1,2 +1,10 @@
 [] Разворот контроллеров
-   [] Pages
+   [x] Pages
+   [x] Auth
+   [-] Upload
+   [-] Search
+   [-] Settings
+   [-] Options
+   [-] Sitemap
+   [-] Casino
+   [-] Game
