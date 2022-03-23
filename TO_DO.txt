@@ -6,5 +6,5 @@
    [-] Settings
    [-] Options
    [-] Sitemap
-   [-] Casino
+   [x] Casino
    [-] Game

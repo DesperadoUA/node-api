@@ -31,9 +31,10 @@ app.use('/api', SearchController)
 app.use('/api', SettingsController)
 app.use('/api', OptionsController)
 app.use('/api', SitemapController)
-app.use('/api', CasinoController)
-app.use('/api', GameController)
 */
+app.use('/api', CasinoController)
+//app.use('/api', GameController)
+
 
 function startApp(){
     try{
