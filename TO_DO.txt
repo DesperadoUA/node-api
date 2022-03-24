@@ -1,7 +1,7 @@
 [] Разворот контроллеров
    [x] Pages
    [x] Auth
-   [-] Upload
+   [x] Upload
    [-] Search
    [-] Settings
    [-] Options

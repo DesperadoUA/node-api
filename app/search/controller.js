@@ -1,0 +1,19 @@
+const {Router} = require('express')
+const router = Router()
+//const Service = require('../services/SearchService')
+//const auth = require('./../middleware/auth')
+
+router.post('/search', async (req, res) => {
+    //const {lang, searchWord} = req.body
+    //const response = await Service.search(lang, searchWord)
+    const response = {confirm: 'ok', body: []}
+    res.status(200).json(response)
+})
+
+router.post('/admin/search', async (req, res) => {
+    //const {lang, postType, searchWord} = req.body
+    //const response = await Service.adminSearch(lang, postType, searchWord)
+    const response = {confirm: 'ok', body: []}
+    res.status(200).json(response)
+})
+module.exports = router
