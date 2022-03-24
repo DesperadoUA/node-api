@@ -3,8 +3,8 @@
    [x] Auth
    [x] Upload
    [x] Search
-   [-] Settings
+   [x] Settings
    [-] Options
    [-] Sitemap
    [x] Casino
-   [-] Game
+   [-] Game 
