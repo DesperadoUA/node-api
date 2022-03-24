@@ -4,7 +4,7 @@
    [x] Upload
    [x] Search
    [x] Settings
-   [-] Options
+   [x] Options
    [-] Sitemap
    [x] Casino
    [-] Game 
