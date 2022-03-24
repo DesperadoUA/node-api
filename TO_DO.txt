@@ -2,7 +2,7 @@
    [x] Pages
    [x] Auth
    [x] Upload
-   [-] Search
+   [x] Search
    [-] Settings
    [-] Options
    [-] Sitemap
