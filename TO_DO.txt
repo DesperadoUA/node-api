@@ -10,11 +10,13 @@
    [x] Game 
 [] Разворот схем баз данных
    [] Pages
-   [] Auth
-   [] Upload
-   [] Search
    [] Settings
    [] Options
-   [] Sitemap
+   [] User
    [] Casino
    [] Game 
+[x] Интеграция Auth
+   [x] Create User
+   [x] Login
+   [x] Check User
+   [x] Logout
