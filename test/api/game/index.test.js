@@ -1,9 +1,9 @@
 const request = require('supertest')
 const app = require('../../../app')
-const postSlug = 'casino'
-const categorySlug = 'casinos'
+const postSlug = 'game'
+const categorySlug = 'games'
 
-describe('Casino', () => {
+describe('Game', () => {
     it(`DTO ${postSlug} post index`, async()=>{
         const response = await request(app).get(`/api/${postSlug}`)
         expect(response.status).toBe(200)

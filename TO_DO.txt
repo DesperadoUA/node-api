@@ -1,10 +1,20 @@
-[] Разворот контроллеров
+[x] Разворот контроллеров
    [x] Pages
    [x] Auth
    [x] Upload
    [x] Search
    [x] Settings
    [x] Options
-   [-] Sitemap
+   [x] Sitemap
    [x] Casino
-   [-] Game 
+   [x] Game 
+[] Разворот схем баз данных
+   [] Pages
+   [] Auth
+   [] Upload
+   [] Search
+   [] Settings
+   [] Options
+   [] Sitemap
+   [] Casino
+   [] Game 
