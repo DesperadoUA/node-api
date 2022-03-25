@@ -1,6 +1,6 @@
 require('dotenv').config()
 const CardBuilder =  require('./CardBuilder')
-const UsersModel = require('./models/index')
+const UsersModel = require('../users/models')
 const crypto = require("crypto")
 class Service {
     static async login(login, password) {

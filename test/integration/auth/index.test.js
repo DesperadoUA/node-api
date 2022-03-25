@@ -19,7 +19,7 @@ describe('Auth', () => {
                          .send(data)
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('ok')
-    }) //[x]
+    }) 
     it('DTO page login true', async()=>{
         const {user} = store
         const response = await request(app).post('/api/admin/login').send({
@@ -33,7 +33,7 @@ describe('Auth', () => {
         expect(response.body.body).toHaveProperty('id')
         expect(response.body.body).toHaveProperty('session')
         expect(response.body.body).toHaveProperty('role', 'admin')
-    }) //[x]
+    }) 
     it('DTO page login false', async()=>{
         const {user} = store
         const response = await request(app).post('/api/admin/login').send({
@@ -42,7 +42,7 @@ describe('Auth', () => {
         })
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('error')
-    }) //[x]
+    }) 
     it('DTO page check-user', async()=>{
         const response = await request(app).post('/api/admin/check-user').send({
             id: currentUserId,
@@ -50,7 +50,7 @@ describe('Auth', () => {
         })
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('ok')
-    }) //[x]
+    }) 
     it('DTO page check-user false', async()=>{
         const response = await request(app).post('/api/admin/check-user').send({
             id: currentUserId,
@@ -58,7 +58,7 @@ describe('Auth', () => {
         })
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('error')
-    }) //[x]
+    }) 
     it('DTO page logout', async()=>{
         const response = await request(app).post('/api/admin/logout').send({
             id: currentUserId,
@@ -66,5 +66,13 @@ describe('Auth', () => {
         })
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('ok')
-    }) //[x]
+    }) 
+    it('DTO page logout false', async()=>{
+        const response = await request(app).post('/api/admin/logout').send({
+            id: currentUserId,
+            session: session+'error'
+        })
+        expect(response.status).toBe(200)
+        expect(response.body.confirm).toBe('error')
+    }) 
 })

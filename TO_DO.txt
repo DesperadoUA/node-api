@@ -12,7 +12,7 @@
    [] Pages
    [] Settings
    [] Options
-   [] User
+   [x] User
    [] Casino
    [] Game 
 [x] Интеграция Auth
