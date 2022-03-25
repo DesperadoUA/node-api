@@ -9,7 +9,7 @@
    [x] Casino
    [x] Game 
 [] Разворот схем баз данных
-   [] Pages
+   [x] Pages
    [] Settings
    [] Options
    [x] User
@@ -20,3 +20,4 @@
    [x] Login
    [x] Check User
    [x] Logout
+[] Base service refactor BasePostModel

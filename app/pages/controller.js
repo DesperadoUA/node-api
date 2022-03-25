@@ -1,13 +1,12 @@
 const {Router} = require('express')
-/*
-const auth = require('./../middleware/auth') 
-const {cashData, cashDestroy} = require('./../middleware/cash')
-const Service = require('../services/PageService')
-*/
+const auth = require('../../middleware/auth') 
+const seeds = require('../../middleware/seeds') 
+const {cashData, cashDestroy} = require('../../middleware/cash')
+const Service = require('./service')
 const router = Router()
 
 router.get('/pages', async (req, res) => {
-   /* const settings = {}
+    const settings = {}
     if(req.query.limit) {
         const param = Number(req.query.limit)
         if(Number.isInteger(param)) settings.limit = param
@@ -28,38 +27,35 @@ router.get('/pages', async (req, res) => {
     if(req.query.orderKey) {
         if(ORDER_KEY.includes(req.query.orderKey)) settings.orderKey = req.query.orderKey
     } 
-    const response = await Service.index(settings)*/
-    const response = {confirm: 'ok', body: []}
+    const response = await Service.index(settings)
     res.status(200).json(response)
-}) // [x]
-router.get('/pages/seeds', async (req, res) => {
-   // const response = await Service.seeds()
-    const response = {confirm: 'ok', body: []}
+}) 
+router.get('/pages/seeds', seeds, async (req, res) => {
+    const response = await Service.seeds()
     res.status(200).json(response)
-}) // [x]
-router.get('/pages/:url', async (req, res) => {
-    // const response = await Service.getPublicPostByUrl(req.params.url)
-    const response = {confirm: 'ok', body: []}
+}) 
+router.post('/pages/destroy', seeds, async (req, res)=>{
+    const response = await Service.destroy()
     res.status(200).json(response)
-}) // [x]
-router.post('/admin/pages', async (req, res)=>{
-  /*  const {lang, limit, offset} = req.body
+}) 
+router.get('/pages/:url', cashData, async (req, res) => {
+    const response = await Service.getPublicPostByUrl(req.params.url)
+    res.status(200).json(response)
+}) 
+router.post('/admin/pages', auth, async (req, res)=>{
+    const {lang, limit, offset} = req.body
     const settings = {lang, limit, offset}
     const response = await Service.indexAdmin(settings)
-    */
-    const response = {confirm: 'ok', body: []}
     res.status(200).json(response)
-}) // [x]
-router.post('/admin/pages/update', async (req, res)=>{
-   // const {data} = req.body
-   // const response = await Service.update(data)
-    const response = {confirm: 'ok', body: []}
+}) 
+router.post('/admin/pages/update', auth, cashDestroy, async (req, res)=>{
+    const {data} = req.body
+    const response = await Service.update(data)
     res.status(200).json(response)
-}) // [x]
-router.post('/admin/pages/:id', async (req, res)=>{
-   // const response = await Service.getById(req.params.id)
-    const response = {confirm: 'ok', body: []}
+}) 
+router.post('/admin/pages/:id', auth, async (req, res)=>{
+    const response = await Service.getById(req.params.id)
     res.status(200).json(response)
-}) // [x]
+}) 
 
 module.exports = router
