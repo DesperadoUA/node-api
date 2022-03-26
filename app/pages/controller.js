@@ -2,6 +2,7 @@ const {Router} = require('express')
 const auth = require('../../middleware/auth') 
 const seeds = require('../../middleware/seeds') 
 const {cashData, cashDestroy} = require('../../middleware/cash')
+const cash = require('../../helpers/cash')
 const Service = require('./service')
 const router = Router()
 
@@ -40,6 +41,7 @@ router.post('/pages/destroy', seeds, async (req, res)=>{
 }) 
 router.get('/pages/:url', cashData, async (req, res) => {
     const response = await Service.getPublicPostByUrl(req.params.url)
+    cash.setData(req.url, response)
     res.status(200).json(response)
 }) 
 router.post('/admin/pages', auth, async (req, res)=>{

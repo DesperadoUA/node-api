@@ -20,4 +20,8 @@
    [x] Login
    [x] Check User
    [x] Logout
+[x] Интеграция media library
+   [x] uploads
+   [x] media
+   [x] delete-media
 [] Base service refactor BasePostModel
