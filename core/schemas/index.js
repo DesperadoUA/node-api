@@ -23,8 +23,8 @@ db.sequelize = sequelize
 
 db.users = require('./../../app/users/schemas/')(sequelize, DataTypes)
 db.pages = require('./../../app/pages/schemas')(sequelize, DataTypes)
+db.settings = require('./../../app/settings/schemas')(sequelize, DataTypes)
 /*
-db.settings = require('./settings')(sequelize, DataTypes)
 db.options = require('./options')(sequelize, DataTypes)
 
 //---  Casino ---//

@@ -10,7 +10,7 @@
    [x] Game 
 [] Разворот схем баз данных
    [x] Pages
-   [] Settings
+   [x] Settings
    [] Options
    [x] User
    [] Casino

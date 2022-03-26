@@ -1,5 +1,5 @@
 require('dotenv').config()
-const CardBuilder =  require('./CardBuilder')
+const CardBuilder =  require('../users/CardBuilder')
 const UsersModel = require('../users/models')
 const crypto = require("crypto")
 class Service {

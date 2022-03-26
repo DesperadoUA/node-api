@@ -5,6 +5,43 @@ module.exports = {
             value_2: "Да, принимает. Slotoking одно из первых украинских казино. Кроме игроков их Украины, здесь могут играть жители Европы и Азии."
         }
     ],
+    settings: {
+        text: {
+            key_id: 'text',
+            value: 'Строковый редактор',
+            title: 'Текстовый редактор Input',
+            editor: 'input',
+            updateValue: 'Строковый редактор update'
+        },
+        rich_text: {
+            key_id: 'rich_text',
+            value: '<h2>Текстовый редактор</h2>',
+            title: 'Текстовый редактор RichText',
+            editor: 'rich_text',
+            updateValue: '<h2>Текстовый редактор update</h2>'
+        },
+        multiple_menu: {
+            key_id: 'multiple_menu',
+            value: [],
+            title: 'Двух уровневое меню',
+            editor: 'multiple_menu',
+            updateValue: []
+        },
+        two_input_image: {
+            key_id: 'two_input_image',
+            value: [],
+            title: 'Картинка 2 инпута (одноуровневое меню)',
+            editor: 'two_input_image',
+            updateValue: []
+        },
+        input_text: {
+            key_id: 'input_text',
+            value: [],
+            title: 'Faq',
+            editor: 'input_text',
+            updateValue: []
+        }
+    },
     faqUpdate: [
         {
             value_1: "✅ Принимает ли Slotoking игроков из Украины? update",
