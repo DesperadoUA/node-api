@@ -11,9 +11,9 @@
 [] Разворот схем баз данных
    [x] Pages
    [x] Settings
-   [] Options
+   [x] Options
    [x] User
-   [] Casino
+   [x] Casino
    [] Game 
 [x] Интеграция Auth
    [x] Create User
@@ -25,4 +25,5 @@
    [x] media
    [x] delete-media
 [] Base service refactor BasePostModel
-[] Refactor seeds get
+[x] Refactor seeds get
+[] Создание функционала для поиска

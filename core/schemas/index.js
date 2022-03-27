@@ -25,14 +25,12 @@ db.users = require('./../../app/users/schemas/')(sequelize, DataTypes)
 db.pages = require('./../../app/pages/schemas')(sequelize, DataTypes)
 db.settings = require('./../../app/settings/schemas')(sequelize, DataTypes)
 db.options = require('./../../app/options/schemas')(sequelize, DataTypes)
-/*
-
 
 //---  Casino ---//
-db.casinos = require('./casino')(sequelize, DataTypes)
-db.casinoMeta = require('./casino/meta')(sequelize, DataTypes)
-db.casinoCategory = require('./casino/category')(sequelize, DataTypes)
-db.casinoCategoryRelatives = require('./casino/category_relatives')(sequelize, DataTypes)
+db.casinos = require('./../../app/casino/schemas')(sequelize, DataTypes)
+db.casinoMeta = require('./../../app/casino/schemas/meta')(sequelize, DataTypes)
+db.casinoCategory = require('./../../app/casino/schemas/category')(sequelize, DataTypes)
+db.casinoCategoryRelatives = require('./../../app/casino/schemas/category_relatives')(sequelize, DataTypes)
 
 db.casinos.hasOne(db.casinoMeta, {onDelete: 'CASCADE', foreignKey: 'post_id'})
 db.casinoMeta.belongsTo(db.casinos, {foreignKey: 'post_id'})
@@ -41,6 +39,7 @@ db.casinos.belongsToMany(db.casinoCategory, {through: 'casino_category_relatives
 db.casinoCategory.belongsToMany(db.casinos, {through: 'casino_category_relatives', foreignKey: 'relative_id', onDelete: 'CASCADE'})
 
 //---  Casino End ---//
+/*
 //---  Games ---//
 db.games = require('./game')(sequelize, DataTypes)
 db.gameMeta = require('./game/meta')(sequelize, DataTypes)
