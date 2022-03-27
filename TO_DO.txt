@@ -25,3 +25,4 @@
    [x] media
    [x] delete-media
 [] Base service refactor BasePostModel
+[] Refactor seeds get

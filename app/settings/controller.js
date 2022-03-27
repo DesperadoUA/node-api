@@ -17,7 +17,7 @@ router.get('/settings/seeds', seeds, async (req, res) => {
     const response = await Service.seeds()
     res.status(200).json(response)
 })
-router.post('/settings/destroy', seeds, async (req, res)=>{
+router.get('/settings/destroy', seeds, async (req, res)=>{
     const response = await Service.destroy()
     res.status(200).json(response)
 }) 

@@ -15,9 +15,8 @@ describe('Settings', () => {
         session = response.body.body.session
         currentUserId = response.body.body.id
     }) 
-
     it('DTO destroy', async()=>{
-        const response = await request(app).post('/api/settings/destroy').send({})
+        const response = await request(app).get('/api/settings/destroy')
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('ok')
     })
@@ -26,7 +25,6 @@ describe('Settings', () => {
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('ok')
     })
-    
     it('DTO index', async()=>{
         const response = await request(app).get('/api/settings')
         expect(response.status).toBe(200)
@@ -34,7 +32,6 @@ describe('Settings', () => {
         expect(response.body).toHaveProperty('body')
         expect(Array.isArray(response.body.body)).toBe(true)
     })
-    
     it('DTO admin index ru', async()=>{
         const response = await request(app).post('/api/admin/settings').send({
             id: currentUserId,
@@ -45,8 +42,7 @@ describe('Settings', () => {
         expect(response.body.confirm).toBe('ok')
         expect(Array.isArray(response.body.body)).toBe(true)
     })
-
-    it('DTO admin index ru fail auth', async()=>{
+    it('DTO admin index fail auth', async()=>{
         const response = await request(app).post('/api/admin/settings').send({
             id: currentUserId,
             lang: 1,
@@ -55,7 +51,6 @@ describe('Settings', () => {
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('error')
     })
-
     it('DTO admin index ua', async()=>{
         const response = await request(app).post('/api/admin/settings').send({
             id: currentUserId,
@@ -66,17 +61,6 @@ describe('Settings', () => {
         expect(response.body.confirm).toBe('ok')
         expect(Array.isArray(response.body.body)).toBe(true)
     })
-
-    it('DTO admin index ua fail auth', async()=>{
-        const response = await request(app).post('/api/admin/settings').send({
-            id: currentUserId,
-            lang: 2,
-            session: session+'error'
-        })
-        expect(response.status).toBe(200)
-        expect(response.body.confirm).toBe('error')
-    })
-    
     it('DTO admin update', async()=>{
         const response = await request(app).post('/api/admin/settings/update').send({
             data: {
@@ -92,7 +76,6 @@ describe('Settings', () => {
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('ok')
     })
-
     it('DTO admin update fail auth', async()=>{
         const response = await request(app).post('/api/admin/settings/update').send({
             data: {
@@ -108,7 +91,6 @@ describe('Settings', () => {
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('error')
     })
-    
     it('DTO settings id=1', async()=>{
         const response = await request(app).post('/api/admin/settings/1').send({
             id: currentUserId,
@@ -123,7 +105,6 @@ describe('Settings', () => {
         expect(response.body.body.title).toBe(store.settings.text.title)
         expect(response.body.body.value).toBe(store.settings.text.updateValue)
     })
-
     it('DTO settings id=1 fail auth', async()=>{
         const response = await request(app).post('/api/admin/settings/1').send({
             id: currentUserId,

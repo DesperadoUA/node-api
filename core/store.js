@@ -42,6 +42,15 @@ module.exports = {
             updateValue: []
         }
     },
+    options: {
+        logo: {
+            key_id: 'logo',
+            value: 'http://127.0.0.1:5000/img/default.png',
+            title: 'Редактор изображения Logo',
+            editor: 'image',
+            updateValue: 'http://127.0.0.1:5000/img/update.png'
+        }
+    },
     faqUpdate: [
         {
             value_1: "✅ Принимает ли Slotoking игроков из Украины? update",

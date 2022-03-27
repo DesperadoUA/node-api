@@ -4,7 +4,7 @@ const Sequilize = require("sequelize")
 const {DataTypes} = Sequilize
 
 const sequelize = new Sequilize(dbConfig[process.env.NODE_ENV].DB, dbConfig[process.env.NODE_ENV].USER, dbConfig[process.env.NODE_ENV].PASSWORD, {
-    dialect: dbConfig[process.env.NODE_ENV].dialect,
+    dialect: dbConfig[process.env.NODE_ENV].DIALECT,
     host: dbConfig[process.env.NODE_ENV].HOST, 
     logging: false
 })
@@ -24,8 +24,9 @@ db.sequelize = sequelize
 db.users = require('./../../app/users/schemas/')(sequelize, DataTypes)
 db.pages = require('./../../app/pages/schemas')(sequelize, DataTypes)
 db.settings = require('./../../app/settings/schemas')(sequelize, DataTypes)
+db.options = require('./../../app/options/schemas')(sequelize, DataTypes)
 /*
-db.options = require('./options')(sequelize, DataTypes)
+
 
 //---  Casino ---//
 db.casinos = require('./casino')(sequelize, DataTypes)
