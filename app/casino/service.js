@@ -4,6 +4,8 @@ const BaseService =  require('../../core/BaseService')
 const store = require('../../core/store')
 const config = require('../../config')
 const POST_TYPE = 'CASINO'
+const Helper = require('../../helpers')
+const MetaFields = require('./fields')
 class Service extends BaseService {
     static async getPublicPostByUrl(url) {
         const response = {
@@ -174,24 +176,7 @@ class Service extends BaseService {
         return response
     } 
     static dataValidateMetaSave(data) {
-        let newData = {}
-        
-        newData.faq = data.faq ? JSON.stringify(data.faq) : JSON.stringify([])
-        newData.reviews = data.reviews ? JSON.stringify(data.reviews) : JSON.stringify([])
-        newData.ref = data.ref ? JSON.stringify(data.ref) : JSON.stringify([])
-        newData.close = data.close ? data.close : 0
-        newData.rating = data.rating ? data.rating : 0
-        newData.phone = data.phone ? data.phone : ''
-        newData.min_deposit = data.min_deposit ? data.min_deposit : ''
-        newData.min_payments = data.min_payments ? data.min_payments : ''
-        newData.email = data.email ? data.email : ''
-        newData.chat = data.chat ? data.chat : ''
-        newData.year = data.year ? data.year : ''
-        newData.site = data.site ? data.site : ''
-        newData.withdrawal = data.withdrawal ? data.withdrawal : ''
-        newData.number_games = data.number_games ? data.number_games : ''
-        
-        return newData
+        return Helper.metaSave(data, MetaFields)
     } 
     static async getRelativeAdmin(data) {
         const response = {

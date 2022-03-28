@@ -12,7 +12,8 @@ class Model extends PostModel {
          data: []
      }
      try {
-      await MainModel.bulkCreate(posts)
+      const totalPosts = await MainModel.findAll({})
+      if(totalPosts.length === 0) await MainModel.bulkCreate(posts)
       return response
      }
      catch (error) {
@@ -27,7 +28,8 @@ class Model extends PostModel {
          data: []
      }
      try {
-      await MetaModel.bulkCreate(posts)
+      const totalPosts = await MainModel.findAll({})
+      if(totalPosts.length === 0) await MetaModel.bulkCreate(posts)
       return response
      }
      catch (error) {

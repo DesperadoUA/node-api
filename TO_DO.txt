@@ -27,3 +27,5 @@
 [] Base service refactor BasePostModel
 [x] Refactor seeds get
 [] Создание функционала для поиска
+[] Разделить тесты на DTO и проверку auth
+[] Вынести в тестах залогинивание в хук beforeAll()
