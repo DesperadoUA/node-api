@@ -12,11 +12,11 @@ describe('Meta fields', () => {
             }
         } 
     })
-    it(`Save empty`,() => {
+    it(`Save with data`,() => {
         const data = {
-            faq: [],
-            reviews: [],
-            ref: [],
+            faq: store.faq,
+            reviews: store.reviews,
+            ref: store.ref,
             close: 0,
             rating: 75,
             phone: 'phone',
@@ -32,9 +32,9 @@ describe('Meta fields', () => {
         const result = Helper.metaSave(data, casinoFields)
         for(const key in casinoFields) {
             if(casinoFields[key].dataType === 'JSON') {
-                expect(result[key]).toEqual(JSON.stringify(casinoFields[key].default))
+                expect(result[key]).toEqual(JSON.stringify(data[key]))
             } else {
-                expect(result[key]).toEqual(casinoFields[key].default)
+                expect(result[key]).toEqual(data[key])
             }
         } 
     })

@@ -6,6 +6,7 @@ const config = require('../../config')
 const POST_TYPE = 'CASINO'
 const Helper = require('../../helpers')
 const MetaFields = require('./fields')
+const fields = require('./fields')
 class Service extends BaseService {
     static async getPublicPostByUrl(url) {
         const response = {
@@ -43,10 +44,7 @@ class Service extends BaseService {
         const err = []
         const posts = []
         const postsMeta = []
-        const faq = store.faq
-        const ref = store.ref
         const img = store.img
-        const reviews = store.reviews
         for(let i=0; i<numberPosts; i++) {
             posts.push(
                 {
@@ -61,22 +59,7 @@ class Service extends BaseService {
                     content: `Content post-${i}`
                 }
             )
-
-            postsMeta.push({
-                faq: JSON.stringify(faq),
-                reviews: JSON.stringify(reviews),
-                ref: JSON.stringify(ref),
-                phone: `Phone post-${i}`,
-                min_deposit: `Min deposit post-${i}`,
-                min_payments: `Min payments post-${i}`,
-                email: `Email post-${i}`,
-                chat: `Chat post-${i}`,
-                year: `Year post-${i}`,
-                site: `Site post-${i}`,
-                withdrawal: `Withdrawal post-${i}`,
-                number_games: `Number Games post-${i}`,
-                post_id: i+1
-            })
+            postsMeta.push(Object.assign(Helper.metaSave({}, fields), {post_id: i+1}))
         }
         const createData = await PostModel.bulkCreate(posts)
         err.push(createData.confirm)
