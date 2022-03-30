@@ -201,7 +201,7 @@ describe('Casino', () => {
     })
 })
 
-describe('Casino auth fail auth', () => {
+describe('Casino fail auth', () => {
     let currentUserId = 1
     let session = 'error'
     let insertPostId = 0

@@ -43,15 +43,6 @@ describe('Options', () => {
         expect(response.body.confirm).toBe('ok')
         expect(Array.isArray(response.body.body)).toBe(true)
     })
-    it('DTO admin index fail auth', async()=>{
-        const response = await request(app).post('/api/admin/options').send({
-            id: currentUserId,
-            lang: 1,
-            session: session+'error'
-        })
-        expect(response.status).toBe(200)
-        expect(response.body.confirm).toBe('error')
-    })
     it('DTO admin update', async()=>{
         const response = await request(app).post('/api/admin/options/update').send({
              data: {
@@ -67,21 +58,6 @@ describe('Options', () => {
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('ok')
     })
-    it('DTO admin update fail auth', async()=>{
-        const response = await request(app).post('/api/admin/options/update').send({
-            data: {
-                editor: store.options.logo.editor,
-                id: 1,
-                key_id: store.options.logo.key_id,
-                title: store.options.logo.title,
-                value: store.options.logo.updateValue
-            },
-            id: currentUserId,
-            session: session+'error'
-        })
-        expect(response.status).toBe(200)
-        expect(response.body.confirm).toBe('error')
-    })
     it('DTO options id=1', async()=>{
         const response = await request(app).post('/api/admin/options/1').send({
             id: currentUserId,
@@ -96,10 +72,38 @@ describe('Options', () => {
         expect(response.body.body.title).toBe(store.options.logo.title)
         expect(response.body.body.value).toBe(store.options.logo.updateValue)
     })
-    it('DTO options id=1 fail auth', async()=>{
+})
+describe('Options fail auth', () => {
+    let session = 'error'
+    let currentUserId = 0
+    it('Admin index', async()=>{
+        const response = await request(app).post('/api/admin/options').send({
+            id: currentUserId,
+            lang: 1,
+            session: session
+        })
+        expect(response.status).toBe(200)
+        expect(response.body.confirm).toBe('error')
+    })
+    it('Admin update', async()=>{
+        const response = await request(app).post('/api/admin/options/update').send({
+            data: {
+                editor: store.options.logo.editor,
+                id: 1,
+                key_id: store.options.logo.key_id,
+                title: store.options.logo.title,
+                value: store.options.logo.updateValue
+            },
+            id: currentUserId,
+            session: session
+        })
+        expect(response.status).toBe(200)
+        expect(response.body.confirm).toBe('error')
+    })
+    it('Admin options id=1', async()=>{
         const response = await request(app).post('/api/admin/options/1').send({
             id: currentUserId,
-            session: session+'error',
+            session: session,
             url: 1
         })
         expect(response.status).toBe(200)

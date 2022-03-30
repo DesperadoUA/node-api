@@ -28,5 +28,11 @@
 [x] Refactor seeds get
 [] Создание функционала для поиска
 [] Разделить тесты на DTO и проверку auth
+  [x] auth
+  [x] casino
+  [] Options
+  [] Pages
+  [] Settings
+  [] Upload
 [] Вынести в тестах залогинивание в хук beforeAll()
 [] Рефактор bulkCreate для все типов постов по аналогии с казино
