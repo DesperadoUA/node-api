@@ -30,18 +30,6 @@ describe('Upload', () => {
         expect(response.body.confirm).toBe('ok')
         expect(response.body).toHaveProperty('src')
     })
-    it('DTO uploads fail auth', async()=>{
-        const response = await request(app).post('/api/admin/uploads').send({
-            id: currentUserId,
-            session: session+'error',
-            file: {
-                name: "default.png",
-                base64: store.base64
-            }
-        })
-        expect(response.status).toBe(200)
-        expect(response.body.confirm).toBe('error')
-    })
     it('DTO media', async()=>{
         const response = await request(app).post('/api/admin/media').send({
             id: currentUserId,
@@ -68,11 +56,36 @@ describe('Upload', () => {
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('ok')
     })
-    it('DTO delete file fail auth', async()=>{
-        const response = await request(app).post('/api/admin/delete-media').send({
-            file: newSrc,
+})
+
+describe('Upload fail auth', () => {
+    let session = 'error'
+    let currentUserId = 0
+    it('Path uploads', async()=>{
+        const response = await request(app).post('/api/admin/uploads').send({
             id: currentUserId,
-            session: session+'error'
+            session: session,
+            file: {
+                name: "default.png",
+                base64: store.base64
+            }
+        })
+        expect(response.status).toBe(200)
+        expect(response.body.confirm).toBe('error')
+    })
+    it('Path media', async()=>{
+        const response = await request(app).post('/api/admin/media').send({
+            id: currentUserId,
+            session: session
+        })
+        expect(response.status).toBe(200)
+        expect(response.body.confirm).toBe('error')
+    })
+    it('Path delete', async()=>{
+        const response = await request(app).post('/api/admin/delete-media').send({
+            file: '',
+            id: currentUserId,
+            session: session
         })
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('error')
