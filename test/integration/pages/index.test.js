@@ -15,19 +15,16 @@ describe('Static pages', () => {
         session = response.body.body.session
         currentUserId = response.body.body.id
     }) 
-
     it('DTO pages destroy', async()=>{
         const response = await request(app).post('/api/pages/destroy')
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('ok')
     }) 
-
     it('DTO page seeds', async()=>{
         const response = await request(app).get('/api/pages/seeds')
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('ok')
     }) 
-
     it('DTO page main', async()=>{
         const response = await request(app).get('/api/pages/main')
         expect(response.status).toBe(200)
@@ -46,14 +43,12 @@ describe('Static pages', () => {
         expect(response.body.body).toHaveProperty('faq')
         expect(response.body.body).toHaveProperty('content')
     }) 
-    
     it('DTO pages index', async()=>{
         const response = await request(app).get('/api/pages')
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('ok')
         expect(Array.isArray(response.body.body)).toBe(true)
-    }) 
-    
+    })
     it('DTO admin pages index ru', async()=>{
         const response = await request(app).post('/api/admin/pages').send({
             id: currentUserId,
@@ -65,8 +60,7 @@ describe('Static pages', () => {
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('ok')
         expect(Array.isArray(response.body.body)).toBe(true)
-    }) 
-
+    })
     it('DTO admin pages index ua', async()=>{
         const response = await request(app).post('/api/admin/pages').send({
             id: currentUserId,
@@ -79,7 +73,6 @@ describe('Static pages', () => {
         expect(response.body.confirm).toBe('ok')
         expect(Array.isArray(response.body.body)).toBe(true)
     }) 
-
     it('DTO admin pages update', async()=>{
         const response = await request(app).post('/api/admin/pages/update').send({
             id: currentUserId,
@@ -89,7 +82,6 @@ describe('Static pages', () => {
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('ok')
     })
-
     it('DTO admin pages id=1', async()=>{
         const response = await request(app).post('/api/admin/pages/1').send({
             id: currentUserId,
@@ -111,5 +103,38 @@ describe('Static pages', () => {
         expect(response.body.body).toHaveProperty('thumbnail', store.pages.main.update.thumbnail)
         expect(response.body.body).toHaveProperty('title', store.pages.main.update.title)
         expect(response.body.body.faq).toEqual(store.faqUpdate)
+    }) 
+})
+describe('Static pages fail auth', () => {
+    let session = 'error'
+    let currentUserId = 0
+    it('Admin pages index ru', async()=>{
+        const response = await request(app).post('/api/admin/pages').send({
+            id: currentUserId,
+            lang: 1,
+            limit: 8,
+            offset: 0,
+            session: session
+        })
+        expect(response.status).toBe(200)
+        expect(response.body.confirm).toBe('error')
+    })
+    it('Admin pages update', async()=>{
+        const response = await request(app).post('/api/admin/pages/update').send({
+            id: currentUserId,
+            session: session,
+            data: {}
+        })
+        expect(response.status).toBe(200)
+        expect(response.body.confirm).toBe('error')
+    })
+    it('DTO admin pages id=1', async()=>{
+        const response = await request(app).post('/api/admin/pages/1').send({
+            id: currentUserId,
+            session: session,
+            url: 1
+        })
+        expect(response.status).toBe(200)
+        expect(response.body.confirm).toBe('error')
     }) 
 })

@@ -30,8 +30,8 @@
 [] Разделить тесты на DTO и проверку auth
   [x] auth
   [x] casino
-  [] Options
-  [] Pages
+  [x] Options
+  [x] Pages
   [] Settings
   [] Upload
 [] Вынести в тестах залогинивание в хук beforeAll()
