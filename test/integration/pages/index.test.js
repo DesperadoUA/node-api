@@ -6,7 +6,7 @@ describe('Static pages', () => {
     let session = ''
     let currentUserId = 0
 
-    it('login', async()=>{
+    beforeAll( async()=> {
         const {user} = store
         const response = await request(app).post('/api/admin/login').send({
             password: user.password,
@@ -14,7 +14,8 @@ describe('Static pages', () => {
         })
         session = response.body.body.session
         currentUserId = response.body.body.id
-    }) 
+    })
+
     it('DTO pages destroy', async()=>{
         const response = await request(app).post('/api/pages/destroy')
         expect(response.status).toBe(200)

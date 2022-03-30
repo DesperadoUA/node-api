@@ -7,7 +7,7 @@ describe('Upload', () => {
     let currentUserId = 0
     let newSrc = ''
 
-    it('login', async()=>{
+    beforeAll( async()=> {
         const {user} = store
         const response = await request(app).post('/api/admin/login').send({
             password: user.password,
@@ -15,7 +15,7 @@ describe('Upload', () => {
         })
         session = response.body.body.session
         currentUserId = response.body.body.id
-    }) 
+    })
     it('DTO uploads', async()=>{
         const response = await request(app).post('/api/admin/uploads').send({
             id: currentUserId,
@@ -38,14 +38,6 @@ describe('Upload', () => {
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('ok')
         expect(response.body.body.includes(newSrc)).toBe(true)
-    })
-    it('DTO media fail auth', async()=>{
-        const response = await request(app).post('/api/admin/media').send({
-            id: currentUserId,
-            session: session+'error'
-        })
-        expect(response.status).toBe(200)
-        expect(response.body.confirm).toBe('error')
     })
     it('DTO delete file', async()=>{
         const response = await request(app).post('/api/admin/delete-media').send({

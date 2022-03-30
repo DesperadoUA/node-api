@@ -27,12 +27,17 @@
 [] Base service refactor BasePostModel
 [x] Refactor seeds get
 [] Создание функционала для поиска
-[] Разделить тесты на DTO и проверку auth
+[x] Разделить тесты на DTO и проверку auth
   [x] auth
   [x] casino
   [x] Options
   [x] Pages
-  [] Settings
-  [] Upload
+  [x] Settings
+  [x] Upload
 [] Вынести в тестах залогинивание в хук beforeAll()
+  [x] casino
+  [x] Options
+  [x] Pages
+  [] Settings
+  [x] Upload
 [] Рефактор bulkCreate для все типов постов по аналогии с казино

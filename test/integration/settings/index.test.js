@@ -6,7 +6,7 @@ describe('Settings', () => {
     let session = ''
     let currentUserId = 0
 
-    it('login', async()=>{
+    beforeAll( async()=> {
         const {user} = store
         const response = await request(app).post('/api/admin/login').send({
             password: user.password,
