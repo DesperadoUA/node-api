@@ -42,15 +42,6 @@ describe('Settings', () => {
         expect(response.body.confirm).toBe('ok')
         expect(Array.isArray(response.body.body)).toBe(true)
     })
-    it('DTO admin index fail auth', async()=>{
-        const response = await request(app).post('/api/admin/settings').send({
-            id: currentUserId,
-            lang: 1,
-            session: session+'error'
-        })
-        expect(response.status).toBe(200)
-        expect(response.body.confirm).toBe('error')
-    })
     it('DTO admin index ua', async()=>{
         const response = await request(app).post('/api/admin/settings').send({
             id: currentUserId,
@@ -76,21 +67,6 @@ describe('Settings', () => {
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('ok')
     })
-    it('DTO admin update fail auth', async()=>{
-        const response = await request(app).post('/api/admin/settings/update').send({
-            data: {
-                editor: 'input',
-                id: 1,
-                key_id: 'text',
-                title: 'Текстовый редактор Input',
-                value: store.settings.text.updateValue
-            },
-            id: currentUserId,
-            session: session+'error'
-        })
-        expect(response.status).toBe(200)
-        expect(response.body.confirm).toBe('error')
-    })
     it('DTO settings id=1', async()=>{
         const response = await request(app).post('/api/admin/settings/1').send({
             id: currentUserId,
@@ -105,14 +81,41 @@ describe('Settings', () => {
         expect(response.body.body.title).toBe(store.settings.text.title)
         expect(response.body.body.value).toBe(store.settings.text.updateValue)
     })
-    it('DTO settings id=1 fail auth', async()=>{
+})
+describe('Settings fail auth', () => {
+    let session = 'error'
+    let currentUserId = 0
+    it('Admin index', async()=>{
+        const response = await request(app).post('/api/admin/settings').send({
+            id: currentUserId,
+            lang: 1,
+            session: session
+        })
+        expect(response.status).toBe(200)
+        expect(response.body.confirm).toBe('error')
+    })
+    it('Admin update', async()=>{
+        const response = await request(app).post('/api/admin/settings/update').send({
+            data: {
+                editor: 'input',
+                id: 1,
+                key_id: 'text',
+                title: 'Текстовый редактор Input',
+                value: store.settings.text.updateValue
+            },
+            id: currentUserId,
+            session: session
+        })
+        expect(response.status).toBe(200)
+        expect(response.body.confirm).toBe('error')
+    })
+    it('Admin settings id=1', async()=>{
         const response = await request(app).post('/api/admin/settings/1').send({
             id: currentUserId,
-            session: session+'error',
+            session: session,
             url: 1
         })
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('error')
     })
 })
-
