@@ -72,7 +72,6 @@ router.get(`/${categorySlug}/:url`, cashData, async (req, res) => {
     res.status(200).json(response)
 })
 
-
 router.post(`/admin/${categorySlug}`, auth, async (req, res)=>{
     const {lang, limit, offset} = req.body
     const settings = {lang, limit, offset}

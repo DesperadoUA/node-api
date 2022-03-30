@@ -200,3 +200,98 @@ describe('Casino', () => {
         expect(response.body.confirm).toBe('ok')
     })
 })
+
+describe('Casino auth fail auth', () => {
+    let currentUserId = 1
+    let session = 'error'
+    let insertPostId = 0
+    let insertCategoryId = 0
+    it(`DTO ${postSlug} admin posts index`, async()=>{
+        const response = await request(app).post(`/api/admin/${categorySlug}`).send({
+            lang: 1,
+            id: currentUserId,
+            session: session
+        })
+        expect(response.status).toBe(200)
+        expect(response.body.confirm).toBe('error')
+    })
+    it(`DTO ${postSlug} post update`, async()=>{
+        const response = await request(app).post(`/api/admin/${postSlug}/update`).send({
+            data: {},
+            id: currentUserId,
+            session: session
+        })
+        expect(response.status).toBe(200)
+        expect(response.body.confirm).toBe('error')
+    })
+    it(`DTO ${postSlug} post id=1`, async()=>{
+        const response = await request(app).post(`/api/admin/${postSlug}/1`).send({
+            id: currentUserId,
+            session: session
+        })
+        expect(response.status).toBe(200)
+        expect(response.body.confirm).toBe('error')
+    })
+    it(`DTO ${postSlug} post store`, async()=>{
+        const response = await request(app).post(`/api/admin/${postSlug}/store`).send({
+            data: {},
+            id: currentUserId,
+            session: session
+        })
+        expect(response.status).toBe(200)
+        expect(response.body.confirm).toBe('error')
+    })
+    it(`DTO ${postSlug} post delete`, async()=>{
+        const response = await request(app).post(`/api/admin/${postSlug}/delete`).send({
+            data: insertPostId,
+            id: currentUserId,
+            session: session
+        })
+        expect(response.status).toBe(200)
+        expect(response.body.confirm).toBe('error')
+    }) 
+    it(`DTO ${postSlug} admin category index`, async()=>{
+        const response = await request(app).post(`/api/admin/${postSlug}/category`).send({
+            id: currentUserId,
+            lang: 1,
+            session: session
+        })
+        expect(response.status).toBe(200)
+        expect(response.body.confirm).toBe('error')
+    }) 
+    it(`DTO ${postSlug} admin category update`, async()=>{
+        const response = await request(app).post(`/api/admin/${postSlug}/category/update`).send({
+            data: {},
+            id: currentUserId,
+            session: session
+        })
+        expect(response.status).toBe(200)
+        expect(response.body.confirm).toBe('error')
+    })
+    it(`DTO ${postSlug} admin category id=1`, async()=>{
+        const response = await request(app).post(`/api/admin/${postSlug}/category/1`).send({
+            id: currentUserId,
+            session: session
+        })
+        expect(response.status).toBe(200)
+        expect(response.body.confirm).toBe('error')
+    })
+    it(`DTO ${postSlug} admin category store`, async()=>{
+        const response = await request(app).post(`/api/admin/${postSlug}/category/store`).send({
+            data: {},
+            id: currentUserId,
+            session: session
+        })
+        expect(response.status).toBe(200)
+        expect(response.body.confirm).toBe('error')
+    }) 
+    it(`DTO ${postSlug} admin category delete`, async()=>{
+        const response = await request(app).post(`/api/admin/${postSlug}/category/delete`).send({
+            data: insertCategoryId,
+            id: currentUserId,
+            session: session
+        })
+        expect(response.status).toBe(200)
+        expect(response.body.confirm).toBe('error')
+    })
+})
