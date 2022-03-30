@@ -34,15 +34,6 @@ describe('Auth', () => {
         expect(response.body.body).toHaveProperty('session')
         expect(response.body.body).toHaveProperty('role', 'admin')
     }) 
-    it('DTO page login false', async()=>{
-        const {user} = store
-        const response = await request(app).post('/api/admin/login').send({
-            password: user.password+'error',
-            login: user.name
-        })
-        expect(response.status).toBe(200)
-        expect(response.body.confirm).toBe('error')
-    }) 
     it('DTO page check-user', async()=>{
         const response = await request(app).post('/api/admin/check-user').send({
             id: currentUserId,
@@ -51,14 +42,6 @@ describe('Auth', () => {
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('ok')
     }) 
-    it('DTO page check-user false', async()=>{
-        const response = await request(app).post('/api/admin/check-user').send({
-            id: currentUserId,
-            session: session+'error'
-        })
-        expect(response.status).toBe(200)
-        expect(response.body.confirm).toBe('error')
-    }) 
     it('DTO page logout', async()=>{
         const response = await request(app).post('/api/admin/logout').send({
             id: currentUserId,
@@ -66,13 +49,34 @@ describe('Auth', () => {
         })
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('ok')
-    }) 
-    it('DTO page logout false', async()=>{
-        const response = await request(app).post('/api/admin/logout').send({
-            id: currentUserId,
-            session: session+'error'
+    })
+})
+describe('Auth fail', () => {
+    let session = 'error'
+    let currentUserId = 0
+    it('Page login', async()=>{
+        const {user} = store
+        const response = await request(app).post('/api/admin/login').send({
+            password: user.password+'error',
+            login: user.name
         })
         expect(response.status).toBe(200)
         expect(response.body.confirm).toBe('error')
     }) 
+    it('Page check-user', async()=>{
+        const response = await request(app).post('/api/admin/check-user').send({
+            id: currentUserId,
+            session: session
+        })
+        expect(response.status).toBe(200)
+        expect(response.body.confirm).toBe('error')
+    })
+    it('DTO page logout', async()=>{
+        const response = await request(app).post('/api/admin/logout').send({
+            id: currentUserId,
+            session: session
+        })
+        expect(response.status).toBe(200)
+        expect(response.body.confirm).toBe('error')
+    })  
 })
