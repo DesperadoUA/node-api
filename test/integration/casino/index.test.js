@@ -1,12 +1,13 @@
 const request = require('supertest')
 const app = require('../../../app')
-const postSlug = 'casino'
-const categorySlug = 'casinos'
 const store = require('../../../core/store')
-const fields = require('../../../app/casino/fields')
+const {fields, config} = require('../../../app/casino/settings')
 const commonFields = require('../../../core/BaseFields')
 
-describe('Casino', () => {
+const postSlug = config.postSlug
+const categorySlug = config.categorySlug
+
+describe(postSlug, () => {
     let session = ''
     let currentUserId = 0
     let insertPostId = 0
@@ -201,7 +202,7 @@ describe('Casino', () => {
     })
 })
 
-describe('Casino fail auth', () => {
+describe(`${postSlug} fail auth`, () => {
     let currentUserId = 1
     let session = 'error'
     let insertPostId = 0

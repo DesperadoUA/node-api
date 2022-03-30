@@ -49,7 +49,6 @@ describe('Upload', () => {
         expect(response.body.confirm).toBe('ok')
     })
 })
-
 describe('Upload fail auth', () => {
     let session = 'error'
     let currentUserId = 0

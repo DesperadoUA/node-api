@@ -1,6 +1,7 @@
+const {config} = require('../settings')
 module.exports = (sequelize, DataTypes) => {
     const CommonModel = require('./../../../core/schemas/CommonSchema')(sequelize, DataTypes)
-    const CasinoCategory = sequelize.define("casino_category", {
+    const Category = sequelize.define(config.nameCategoryTable, {
             ...CommonModel,
             parent_id: {
                 type: DataTypes.INTEGER, 
@@ -8,19 +9,19 @@ module.exports = (sequelize, DataTypes) => {
             },
             post_type: {
                 type: DataTypes.STRING,
-                defaultValue: 'casino/category'
+                defaultValue: config.postTypeCategory
             },
             slug: {
                 type: DataTypes.STRING,
-                defaultValue: 'casinos'
+                defaultValue: config.postTypeCategorySlug
             },
             faq: {
                 type: DataTypes.TEXT
             }
         },
         {
-            tableName: 'casino_category',
+            tableName: config.nameCategoryTable,
             timestamps:false
         })
-    return CasinoCategory
+    return Category
 }

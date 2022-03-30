@@ -1,12 +1,13 @@
 const PostModel = require('./models')
 const CardBuilder =  require('./CardBuilder')
 const BaseService =  require('../../core/BaseService')
+const settings = require('./settings')
 const store = require('../../core/store')
 const config = require('../../config')
-const POST_TYPE = 'CASINO'
+const TABLE = settings.config.table
 const Helper = require('../../helpers')
-const MetaFields = require('./fields')
-const fields = require('./fields')
+const fields = settings.fields
+
 class Service extends BaseService {
     static async getPublicPostByUrl(url) {
         const response = {
@@ -14,7 +15,7 @@ class Service extends BaseService {
             body: {}
         }
         const err = []
-        const MainModel = new PostModel(POST_TYPE)
+        const MainModel = new PostModel(TABLE)
         const {confirm, data} = await MainModel.showPublic(url)
         if(data.length !== 0 && confirm === 'ok') {
             err.push(confirm)
@@ -30,7 +31,7 @@ class Service extends BaseService {
             confirm: 'ok',
             body: []
         }
-        const MainModel = new PostModel(POST_TYPE)
+        const MainModel = new PostModel(TABLE)
         const {confirm, data} = await MainModel.allPublic(settings)
         response.confirm = confirm
         response.body = CardBuilder.fetch(data)
@@ -77,7 +78,7 @@ class Service extends BaseService {
             lang: config.LANG[settings.lang]
         }
         const err = []
-        const MainModel = new PostModel(POST_TYPE)
+        const MainModel = new PostModel(TABLE)
 
         const {confirm, data} = await MainModel.all(settings)
         response.body = data
@@ -96,7 +97,7 @@ class Service extends BaseService {
             body: {}
         }
         const err = []
-        const MainModel = new PostModel(POST_TYPE)
+        const MainModel = new PostModel(TABLE)
         const {confirm, data} = await MainModel.getById(id)
         if(data.length !== 0 && confirm === 'ok') {
             err.push(confirm)
@@ -159,7 +160,7 @@ class Service extends BaseService {
         return response
     } 
     static dataValidateMetaSave(data) {
-        return Helper.metaSave(data, MetaFields)
+        return Helper.metaSave(data, fields)
     } 
     static async getRelativeAdmin(data) {
         const response = {
@@ -168,7 +169,7 @@ class Service extends BaseService {
         }
         const err = []
         
-        const categoryRelative = await this.getCategoryAdmin(data, POST_TYPE)
+        const categoryRelative = await this.getCategoryAdmin(data, TABLE)
         err.push(categoryRelative.confirm)
         response.data.category = categoryRelative.data
 
@@ -182,7 +183,7 @@ class Service extends BaseService {
         }
         const err = []
         //----------------- Category --------------------------------------------------//
-        const updateCategory = await this.updateCategory(data, POST_TYPE)
+        const updateCategory = await this.updateCategory(data, TABLE)
         err.push(updateCategory.confirm)
         //----------------------------------------------------------------------------//
 

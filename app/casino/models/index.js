@@ -1,7 +1,8 @@
 const db = require('../../../core/schemas')
 const PostModel = require('../../../core/models/Post')
-const MainModel = db.casinos
-const MetaModel = db.casinoMeta
+const settings = require('../settings')
+const MainModel = db[settings.config.mainDb]
+const MetaModel = db[settings.config.metaDb]
 class Model extends PostModel {
    constructor(name) {
       super(name)

@@ -4,12 +4,14 @@ const seeds = require('./../../middleware/seeds')
 const {cashData, cashDestroy} = require('./../../middleware/cash')
 const Service = require('./service')
 const CategoryService = require('./CategoryService')
-const TABLE = 'CASINO'
-const router = Router()
-const ORDER_KEY = ['rating', 'created_at', 'updated_at']
-const postSlug = 'casino'
-const categorySlug = 'casinos'
 const cash = require('./../../helpers/cash')
+const settings = require('./settings')
+
+const TABLE = settings.config.table
+const ORDER_KEY = settings.config.orderKey
+const postSlug = settings.config.postSlug
+const categorySlug = settings.config.categorySlug
+const router = Router()
 
 router.get(`/${postSlug}`, async (req, res) => {
     const settings = {}

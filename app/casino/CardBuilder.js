@@ -1,6 +1,7 @@
 const CardBuilder =  require('./../../core/BaseCardBuilder')
 const Helper = require('../../helpers')
-const MetaFields = require('./fields')
+const settings = require('./settings')
+const MetaFields = settings.fields
 class CasinoCardBuilder extends CardBuilder {
     static show(post) {
         return Object.assign(this.commonDecode(post), this.metaDecode(post), {content: this.textDecode(post.content)})

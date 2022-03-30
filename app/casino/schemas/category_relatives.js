@@ -1,11 +1,12 @@
+const {config} = require('../settings')
 module.exports = (sequelize, DataTypes) => {
-    const CasinoCategoryRelatives = sequelize.define("casino_category_relatives", {
+    const CategoryRelatives = sequelize.define(config.nameCategoryPostRelativeTable, {
             post_id: DataTypes.INTEGER,
             relative_id: DataTypes.INTEGER
         },
         {
-            tableName: 'casino_category_relatives',
+            tableName: config.nameCategoryPostRelativeTable,
             timestamps:false
         })
-    return CasinoCategoryRelatives
+    return CategoryRelatives
 }

@@ -1,6 +1,7 @@
 const db = require('../../../core/schemas')
 const CategoryModel = require('../../../core/models/Category')
-const MainModel = db.casinoCategory
+const settings = require('../settings')
+const MainModel = db[settings.config.categoryDb]
 class Model extends CategoryModel {
    constructor(name) {
       super(name)

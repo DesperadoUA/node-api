@@ -1,6 +1,7 @@
 require('dotenv').config()
 const dbConfig = require('./../../config/db')
 const Sequilize = require("sequelize")
+const crypto = require("crypto")
 const {DataTypes} = Sequilize
 
 const sequelize = new Sequilize(dbConfig[process.env.NODE_ENV].DB, dbConfig[process.env.NODE_ENV].USER, dbConfig[process.env.NODE_ENV].PASSWORD, {

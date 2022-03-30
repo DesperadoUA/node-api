@@ -5,7 +5,9 @@ const CardBuilder =  require('./CardBuilder')
 const BaseService =  require('../../core/BaseService')
 const store = require('../../core/store')
 const config = require('../../config')
-const POST_TYPE = 'CASINO'
+const settings = require('./settings')
+
+const TABLE = settings.config.table
 const LIMIT_RELATIVE = 10000
 class Service extends BaseService {
     static async getPublicPostByUrl(url) {
@@ -14,12 +16,12 @@ class Service extends BaseService {
             body: {}
         }
         const err = []
-        const categoryModel = new CategoryModel(POST_TYPE)
+        const categoryModel = new CategoryModel(TABLE)
         const {data, confirm} = await categoryModel.showPublic(url)
         err.push(confirm)
         if(data.length !== 0 && confirm === 'ok') {
-            const relativeModel = new RelativeModel(POST_TYPE)
-            const postModel = new PostModel(POST_TYPE)
+            const relativeModel = new RelativeModel(TABLE)
+            const postModel = new PostModel(TABLE)
             
             const relativeData = await relativeModel.getPosts(data[0].id)
             err.push(relativeData.confirm)
@@ -32,7 +34,7 @@ class Service extends BaseService {
         return response
     } 
     static async index(settings) {
-        const categoryModel = new CategoryModel(POST_TYPE)
+        const categoryModel = new CategoryModel(TABLE)
         const {data, confirm} = await categoryModel.allPublic(settings)
         return {
             confirm: confirm,
@@ -74,7 +76,7 @@ class Service extends BaseService {
             lang: config.LANG[settings.lang]
         }
         const err = []
-        const categoryModel = new CategoryModel(POST_TYPE)
+        const categoryModel = new CategoryModel(TABLE)
         const categoryData = await categoryModel.all(settings)
         err.push(categoryData.confirm)
         response.body = categoryData.data
@@ -90,7 +92,7 @@ class Service extends BaseService {
             body: {}
         }
         const err = []
-        const MainModel = new CategoryModel(POST_TYPE)
+        const MainModel = new CategoryModel(TABLE)
         const {data, confirm} = await MainModel.getById(id)
         if(data.length !== 0 && confirm === 'ok') {
             err.push(confirm)
