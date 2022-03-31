@@ -1,6 +1,7 @@
 const {Router} = require('express')
 const auth = require('./../../middleware/auth')
 const seeds = require('./../../middleware/seeds') 
+const queryParams = require('./../../middleware/queryParams') 
 const {cashData, cashDestroy} = require('./../../middleware/cash')
 const Service = require('./service')
 const CategoryService = require('./CategoryService')
@@ -13,25 +14,11 @@ const postSlug = settings.config.postSlug
 const categorySlug = settings.config.categorySlug
 const router = Router()
 
-router.get(`/${postSlug}`, async (req, res) => {
+router.get(`/${postSlug}`, queryParams, async (req, res) => {
     const settings = {}
-    if(req.query.limit) {
-        const param = Number(req.query.limit)
-        if(Number.isInteger(param)) settings.limit = param
-    } 
-    if(req.query.offset) {
-        const param = Number(req.query.offset)
-        if(Number.isInteger(param)) settings.offset = param
-    } 
-    if(req.query.lang) {
-        const param = Number(req.query.lang)
-        if(Number.isInteger(param)) settings.lang = param
-    } 
-    if(req.query.orderBy) {
-        if(req.query.orderBy === 'DESC' || req.query.orderBy === 'ASC') {
-            req.query.orderBy === 'DESC'
-        }
-    } 
+    if('queryParams' in req) {
+        for(key in req.queryParams) settings[key] = req.queryParams[key]
+    }
     if(req.query.orderKey) {
         if(ORDER_KEY.includes(req.query.orderKey)) settings.orderKey = req.query.orderKey
     } 
@@ -47,19 +34,13 @@ router.get(`/${postSlug}/:url`, cashData, async (req, res) => {
     cash.setData(req.url, response)
     res.status(200).json(response)
 })
-router.get(`/${categorySlug}`, async (req, res) => {
+router.get(`/${categorySlug}`, queryParams, async (req, res) => {
     const settings = {}
-    if(req.query.limit) {
-        const param = Number(req.query.limit)
-        if(Number.isInteger(param)) settings.limit = param
-    } 
-    if(req.query.offset) {
-        const param = Number(req.query.offset)
-        if(Number.isInteger(param)) settings.offset = param
-    } 
-    if(req.query.lang) {
-        const param = Number(req.query.lang)
-        if(Number.isInteger(param)) settings.lang = param
+    if('queryParams' in req) {
+        for(key in req.queryParams) settings[key] = req.queryParams[key]
+    }
+    if(req.query.orderKey) {
+        if(ORDER_KEY.includes(req.query.orderKey)) settings.orderKey = req.query.orderKey
     } 
     const response = await CategoryService.index(settings)
     res.status(200).json(response)
