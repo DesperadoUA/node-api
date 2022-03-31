@@ -14,7 +14,8 @@ const config = {
     nameMainTable: tableName.CASINO.main, // Naming for Shemas current schemas
     nameMetaTable: tableName.CASINO.meta,
     nameCategoryTable: tableName.CASINO.category,
-    nameCategoryPostRelativeTable: tableName.CASINO.relative.category
+    nameCategoryPostRelativeTable: tableName.CASINO.relative.category,
+    relatives: {}
 }
 const fields = {
     faq: {

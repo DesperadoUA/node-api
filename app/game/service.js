@@ -108,6 +108,10 @@ class Service extends BaseService {
             err.push(relative.confirm)
             response.body.category = relative.data.category
 
+            for(let key in relatives) {
+                response.body[relatives[key].responseKey] = relative.data.game_casino
+            }
+
             response.confirm = err.includes('error') ? 'error' : 'ok'
         }
         return response
@@ -174,6 +178,12 @@ class Service extends BaseService {
         err.push(categoryRelative.confirm)
         response.data.category = categoryRelative.data
 
+        for(let key in relatives) {
+            const Relative = await this.getSingleRelativeAdmin(data, TABLE, relatives[key].relativePostType, relatives[key].key)
+            err.push(Relative.confirm)
+            response.data[relatives[key].responseKey] = Relative.data
+        }
+
         response.confirm = err.includes('error') ? 'error' : 'ok'
         return response
     }
@@ -187,10 +197,9 @@ class Service extends BaseService {
         const updateCategory = await this.updateCategory(data, TABLE)
         err.push(updateCategory.confirm)
         //----------------------------------------------------------------------------//
-
         //--------------- Posts -----------------------------------------------------//
         for(let key in relatives) {
-            const updateRelative = await this.updateSingleRelative(data, TABLE, relatives[key].key, relatives[key].responseKey)
+            const updateRelative = await this.updateSingleRelative(data, TABLE, relatives[key].relativePostType, relatives[key].key, relatives[key].responseKey)
             err.push(updateRelative.confirm)
         }
         //--------------------------------------------------------------------------//

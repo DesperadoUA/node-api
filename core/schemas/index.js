@@ -40,13 +40,13 @@ db.casinos.belongsToMany(db.casinoCategory, {through: 'casino_category_relatives
 db.casinoCategory.belongsToMany(db.casinos, {through: 'casino_category_relatives', foreignKey: 'relative_id', onDelete: 'CASCADE'})
 
 //---  Casino End ---//
-/*
+
 //---  Games ---//
-db.games = require('./game')(sequelize, DataTypes)
-db.gameMeta = require('./game/meta')(sequelize, DataTypes)
-db.gameCategory = require('./game/category')(sequelize, DataTypes)
-db.gameCategoryRelatives = require('./game/category_relatives')(sequelize, DataTypes)
-db.gameCasinoRelatives = require('./game/casino_relatives')(sequelize, DataTypes)
+db.games = require('./../../app/game/schemas')(sequelize, DataTypes)
+db.gameMeta = require('./../../app/game/schemas/meta')(sequelize, DataTypes)
+db.gameCategory = require('./../../app/game/schemas/category')(sequelize, DataTypes)
+db.gameCategoryRelatives = require('./../../app/game/schemas/category_relatives')(sequelize, DataTypes)
+db.gameCasinoRelatives = require('./../../app/game/schemas/casino_relatives')(sequelize, DataTypes)
 
 db.games.hasOne(db.gameMeta, {onDelete: 'CASCADE', foreignKey: 'post_id'})
 db.gameMeta.belongsTo(db.games, {foreignKey: 'post_id'})
@@ -57,7 +57,7 @@ db.gameCategory.belongsToMany(db.games, {through: 'game_category_relatives', for
 db.games.belongsToMany(db.casinos, {through: 'game_casino_relatives', foreignKey: 'post_id', onDelete: 'CASCADE'})
 db.casinos.belongsToMany(db.games, {through: 'game_casino_relatives', foreignKey: 'relative_id', onDelete: 'CASCADE'}) 
 //--- Games End ----//
-*/
+
 db.sequelize.sync({force:dbConfig[process.env.NODE_ENV].SYNC})
     .then(()=>{
         if(process.env.NODE_ENV !== 'test') console.log('Re-sync')
