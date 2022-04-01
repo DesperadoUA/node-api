@@ -1,43 +1,6 @@
-[x] Разворот контроллеров
-   [x] Pages
-   [x] Auth
-   [x] Upload
-   [x] Search
-   [x] Settings
-   [x] Options
-   [x] Sitemap
-   [x] Casino
-   [x] Game 
-[] Разворот схем баз данных
-   [x] Pages
-   [x] Settings
-   [x] Options
-   [x] User
-   [x] Casino
-   [] Game 
-[x] Интеграция Auth
-   [x] Create User
-   [x] Login
-   [x] Check User
-   [x] Logout
-[x] Интеграция media library
-   [x] uploads
-   [x] media
-   [x] delete-media
+[x] покрыть тестами роуты игр
 [] Base service refactor BasePostModel
-[x] Refactor seeds get
+[] Создать функциональность для search
+[] Создать функциональность для sitemap
 [] Создание функционала для поиска
-[x] Разделить тесты на DTO и проверку auth
-  [x] auth
-  [x] casino
-  [x] Options
-  [x] Pages
-  [x] Settings
-  [x] Upload
-[] Вынести в тестах залогинивание в хук beforeAll()
-  [x] casino
-  [x] Options
-  [x] Pages
-  [] Settings
-  [x] Upload
 [] Рефактор bulkCreate для все типов постов по аналогии с казино
