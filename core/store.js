@@ -284,6 +284,7 @@ module.exports = {
         game: {
             update: {
                 iframe: 'iframe update',
+                category: ['Title category-1'],
                 game_casino: []
             }
         }

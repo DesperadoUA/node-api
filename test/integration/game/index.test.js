@@ -119,9 +119,7 @@ describe(postSlug, () => {
             }
         }
         for(let key in store.posts[postSlug].update) {
-            if(key !== 'category' && key in commonFields) {
-                expect(response.body.body).toHaveProperty(key, store.posts[postSlug].update[key])
-            }
+            expect(response.body.body).toHaveProperty(key)
         }
     })
     it(`DTO ${postSlug} post store`, async()=>{
