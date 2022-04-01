@@ -1,16 +1,14 @@
 const {Router} = require('express')
 const router = Router()
-//const Service = require('../services/SitemapService')
+const Service = require('./service')
 
 router.get('/sitemap', async (req, res) => {
-    /*let lang = 1
+    let lang = 1
     if(req.query.lang) {
         const param = Number(req.query.lang)
         if(Number.isInteger(param)) lang = param
     } 
     const response = await Service.index(lang)
-    */
-    const response = {confirm: 'ok', body: []}
     res.status(200).json(response)
 })
 
