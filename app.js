@@ -3,15 +3,7 @@ const express = require('express')
 const cors = require('cors')
 const path = require('path')
 const bodyParser = require('body-parser')
-const PageController = require('./app/pages/controller')
-const AuthController = require('./app/auth/controller')
-const UploadController = require('./app/upload/controller')
-const SearchController = require('./app/search/controller')
-const SettingsController = require('./app/settings/controller')
-const OptionsController = require('./app/options/controller')
-const SitemapController = require('./app/sitemap/controller')
-const CasinoController = require('./app/casino/controller')
-const GameController = require('./app/game/controller')
+const fs = require('fs')
 
 const PORT = process.env.PORT || 5000
 const app = express()
@@ -23,17 +15,20 @@ app.use('/img', express.static(path.join(__dirname, 'img')))
 app.use(cors())
 global.cash = {}
 
-app.use('/api', PageController)
-app.use('/api', AuthController)
-app.use('/api', UploadController)
-app.use('/api', SearchController)
-app.use('/api', SettingsController)
-app.use('/api', OptionsController)
-app.use('/api', SitemapController)
-app.use('/api', CasinoController)
-app.use('/api', GameController)
+function initControllers(){
+  const arrDir = fs.readdirSync(process.env.APP_DIR, { withFileTypes: true })
+                   .filter(d => d.isDirectory())
+                   .map(d => d.name)
 
-
+  arrDir.forEach(dir => {
+    const filePath = `${process.env.APP_DIR}/${dir}/controller.js`
+    if (fs.existsSync(filePath)) { 
+      const Controller = require(filePath)
+      app.use('/api', Controller)
+    } 
+  })
+}
+initControllers()
 function startApp(){
     try{
        app.listen(PORT, () => {
@@ -45,6 +40,5 @@ function startApp(){
       console.log(e)
     }
 }
-
 if(process.env.NODE_ENV !== 'test') startApp()
 module.exports = app
