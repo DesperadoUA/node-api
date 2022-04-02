@@ -4,7 +4,7 @@ const PostModel = require('./../../core/models/Post')
 const CategoryModel = require('./../../core/models/Category')
 const tables = require('./../../core/models/tableName')
 const config = require('./../../config')
-class SitemapService {
+class Service {
     static async index(lang) {
         const response = {
             confirm: 'ok',
@@ -61,4 +61,4 @@ class SitemapService {
         return response
     }
 }
-module.exports = SitemapService
+module.exports = Service

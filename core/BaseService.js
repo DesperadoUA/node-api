@@ -2,7 +2,6 @@ const config = require('../config')
 const PostModel = require('./models/Post')
 const CategoryModel = require('./models/Category')
 const RelativeModel = require('./models/Relative')
-const BasePostModel = require('./models/Post')
 const CardBuilder =  require('./BaseCardBuilder')
 const Helper = require('./../helpers/')
 const LIMIT_RELATIVE = 10000
@@ -153,7 +152,7 @@ class BaseService {
       const err = []
 
       const relativeModel = new RelativeModel(postType, relative)
-      const postModel = new BasePostModel(postTypeRelative)
+      const postModel = new PostModel(postTypeRelative)
       
       const destroyOldRelative = await relativeModel.destroyByPostId(data.id)
       err.push(destroyOldRelative.confirm)
@@ -209,7 +208,7 @@ class BaseService {
       const err = []
 
       const relativeModel = new RelativeModel(postType, relative)
-      const postModel = new BasePostModel(postTypeRelative)
+      const postModel = new PostModel(postTypeRelative)
       
       const allPosts = await postModel.all(settings)
       err.push(allPosts.confirm)
@@ -266,7 +265,7 @@ class BaseService {
       const err = []
 
       const relativeModel = new RelativeModel(postType, relative)
-      const postModel = new BasePostModel(postTypeRelative)
+      const postModel = new PostModel(postTypeRelative)
 
       const arrId = await relativeModel.getRelatives(data.id)
       err.push(arrId.confirm)

@@ -2,7 +2,7 @@ const CardBuilder =  require('./CardBuilder')
 const Model = require('./models')
 const store = require('../../core/store')
 const config = require('../../config')
-class SettingsService {
+class Service {
     static async index(lang) {
         const response = {
             confirm: 'ok',
@@ -72,4 +72,4 @@ class SettingsService {
         return response
     }
 }
-module.exports = SettingsService
+module.exports = Service

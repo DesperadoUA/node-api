@@ -1,6 +1,6 @@
 const CardBuilder =  require('../../core/BaseCardBuilder')
 const PostModel = require('../../core/models/Post')
-class SearchService {
+class Service {
     static async search(lang, searchWord) {
         const response = {
             confirm: 'ok',
@@ -25,4 +25,4 @@ class SearchService {
         return response
     }
 }
-module.exports = SearchService
+module.exports = Service

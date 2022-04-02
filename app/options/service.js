@@ -1,7 +1,7 @@
 const CardBuilder =  require('./CardBuilder')
 const Model = require('./models')
 const store = require('./../../core/store')
-class OptionsService {
+class Service {
     static async index() {
         const response = {
             confirm: 'ok',
@@ -65,4 +65,4 @@ class OptionsService {
         return response
     }
 }
-module.exports = OptionsService
+module.exports = Service
