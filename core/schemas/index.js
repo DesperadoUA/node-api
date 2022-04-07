@@ -1,8 +1,9 @@
 require('dotenv').config()
 const dbConfig = require('./../../config/db')
 const Sequilize = require("sequelize")
-const crypto = require("crypto")
 const {DataTypes} = Sequilize
+const CasinoDb = require('./../../app/casino/schemas/initial')
+const GameDb = require('./../../app/game/schemas/initial')
 
 const sequelize = new Sequilize(dbConfig[process.env.NODE_ENV].DB, dbConfig[process.env.NODE_ENV].USER, dbConfig[process.env.NODE_ENV].PASSWORD, {
     dialect: dbConfig[process.env.NODE_ENV].DIALECT,
@@ -27,32 +28,7 @@ db.pages = require('./../../app/pages/schemas')(sequelize, DataTypes)
 db.settings = require('./../../app/settings/schemas')(sequelize, DataTypes)
 db.options = require('./../../app/options/schemas')(sequelize, DataTypes)
 
-//---  Casino ---//
-db.casinos = require('./../../app/casino/schemas')(sequelize, DataTypes)
-db.casinoMeta = require('./../../app/casino/schemas/meta')(sequelize, DataTypes)
-db.casinoCategory = require('./../../app/casino/schemas/category')(sequelize, DataTypes)
-db.casinoCategoryRelatives = require('./../../app/casino/schemas/category_relatives')(sequelize, DataTypes)
-
-db.casinos.hasOne(db.casinoMeta, {onDelete: 'CASCADE', foreignKey: 'post_id'})
-db.casinoMeta.belongsTo(db.casinos, {foreignKey: 'post_id'})
-
-db.casinos.belongsToMany(db.casinoCategory, {through: 'casino_category_relatives', foreignKey: 'post_id', onDelete: 'CASCADE'})
-db.casinoCategory.belongsToMany(db.casinos, {through: 'casino_category_relatives', foreignKey: 'relative_id', onDelete: 'CASCADE'})
-
-//---  Casino End ---//
-
-//---  Games ---//
-db.games = require('./../../app/game/schemas')(sequelize, DataTypes)
-db.gameMeta = require('./../../app/game/schemas/meta')(sequelize, DataTypes)
-db.gameCategory = require('./../../app/game/schemas/category')(sequelize, DataTypes)
-db.gameCategoryRelatives = require('./../../app/game/schemas/category_relatives')(sequelize, DataTypes)
-db.gameCasinoRelatives = require('./../../app/game/schemas/casino_relatives')(sequelize, DataTypes)
-
-db.games.hasOne(db.gameMeta, {onDelete: 'CASCADE', foreignKey: 'post_id'})
-db.gameMeta.belongsTo(db.games, {foreignKey: 'post_id'})
-
-db.games.belongsToMany(db.gameCategory, {through: 'game_category_relatives', foreignKey: 'post_id', onDelete: 'CASCADE'})
-db.gameCategory.belongsToMany(db.games, {through: 'game_category_relatives', foreignKey: 'relative_id', onDelete: 'CASCADE'})
+Object.assign(db, CasinoDb(sequelize), GameDb(sequelize))
 
 db.games.belongsToMany(db.casinos, {through: 'game_casino_relatives', foreignKey: 'post_id', onDelete: 'CASCADE'})
 db.casinos.belongsToMany(db.games, {through: 'game_casino_relatives', foreignKey: 'relative_id', onDelete: 'CASCADE'}) 

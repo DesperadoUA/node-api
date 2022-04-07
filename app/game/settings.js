@@ -11,6 +11,7 @@ const config = {
     mainDb: 'games',           // Naming for Shemas (core shemas)
     metaDb: 'gameMeta',
     categoryDb: 'gameCategory',
+    relativeDB: 'gameCategoryRelatives',
     nameMainTable: tableName.GAME.main, // Naming for Shemas current schemas
     nameMetaTable: tableName.GAME.meta,
     nameCategoryTable: tableName.GAME.category,

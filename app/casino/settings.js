@@ -8,9 +8,12 @@ const config = {
     postTypeCategorySlug: 'casinos',
     table: 'CASINO', /* For config tableName */
     orderKey: ['rating', 'created_at', 'updated_at'], /* Key for sort */
-    mainDb: 'casinos',           // Naming for Shemas (core shemas)
+
+    mainDb: 'casinos',           // key in core db
     metaDb: 'casinoMeta',
     categoryDb: 'casinoCategory',
+    relativeDB: 'casinoCategoryRelatives',
+    
     nameMainTable: tableName.CASINO.main, // Naming for Shemas current schemas
     nameMetaTable: tableName.CASINO.meta,
     nameCategoryTable: tableName.CASINO.category,
