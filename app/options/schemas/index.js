@@ -1,26 +1,11 @@
+const {fields, config} = require('../settings')
+const Helper = require('../../../helpers')
 module.exports = (sequelize, DataTypes) => {
-    const Options = sequelize.define("options", {
-            slug: {
-                type: DataTypes.STRING,
-                defaultValue: 'options'
-            },
-            key_id: {
-                type: DataTypes.STRING,
-                unique: true
-            },
-            value: {
-                type: DataTypes.TEXT
-            },
-            title: {
-                type: DataTypes.STRING
-            },
-            editor: {
-                type: DataTypes.STRING 
-            }
-        },
+    const data = Helper.createSchemas(fields, DataTypes)
+    const Post = sequelize.define(config.mainDb, data,
         {
-            tableName: 'options',
+            tableName: config.mainDb,
             timestamps:false
         })
-    return Options
+    return Post
 }

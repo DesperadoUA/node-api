@@ -3,9 +3,9 @@ const Helper = require('../../../helpers')
 
 module.exports = (sequelize, DataTypes) => {
     const data = Helper.createSchemas(fields, DataTypes)
-    const PostMeta = sequelize.define(config.nameMetaTable, data,
+    const PostMeta = sequelize.define(config.metaDb, data,
         {
-            tableName: config.nameMetaTable,
+            tableName: config.metaDb,
             timestamps: false
         })
     PostMeta.removeAttribute('id');

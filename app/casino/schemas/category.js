@@ -1,7 +1,7 @@
 const {config} = require('../settings')
 module.exports = (sequelize, DataTypes) => {
     const CommonModel = require('./../../../core/schemas/CommonSchema')(sequelize, DataTypes)
-    const Category = sequelize.define(config.nameCategoryTable, {
+    const Category = sequelize.define(config.categoryDb, {
             ...CommonModel,
             parent_id: {
                 type: DataTypes.INTEGER, 
@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         {
-            tableName: config.nameCategoryTable,
+            tableName: config.categoryDb,
             timestamps:false
         })
     return Category

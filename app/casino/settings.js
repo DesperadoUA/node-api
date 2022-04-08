@@ -1,4 +1,5 @@
 const tableName = require('../../core/models/tableName')
+const table = 'CASINO'
 const config = {
     postSlug: 'casino',
     categorySlug: 'casinos',
@@ -6,18 +7,13 @@ const config = {
     postTypeSlug: 'casino',
     postTypeCategory: 'casino/category',
     postTypeCategorySlug: 'casinos',
-    table: 'CASINO', /* For config tableName */
     orderKey: ['rating', 'created_at', 'updated_at'], /* Key for sort */
 
-    mainDb: 'casinos',           // key in core db
-    metaDb: 'casinoMeta',
-    categoryDb: 'casinoCategory',
-    relativeDB: 'casinoCategoryRelatives',
-    
-    nameMainTable: tableName.CASINO.main, // Naming for Shemas current schemas
-    nameMetaTable: tableName.CASINO.meta,
-    nameCategoryTable: tableName.CASINO.category,
-    nameCategoryPostRelativeTable: tableName.CASINO.relative.category,
+    table: table, /* For config tableName */
+    mainDb: tableName[table].main,           // key in core db
+    metaDb: tableName[table].meta,
+    categoryDb: tableName[table].category,
+    relativeDB: tableName[table].relative.category,
     relatives: {}
 }
 const fields = {

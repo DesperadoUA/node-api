@@ -1,7 +1,7 @@
 const {config} = require('../settings')
 module.exports = (sequelize, DataTypes) => {
     const CommonModel = require('./../../../core/schemas/CommonSchema')(sequelize, DataTypes)
-    const Post = sequelize.define(config.nameMainTable, {
+    const Post = sequelize.define(config.mainDb, {
             ...CommonModel,
             post_type: {
                 type: DataTypes.STRING,
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         {
-            tableName: config.nameMainTable,
+            tableName: config.mainDb,
             timestamps: false
         })
     return Post
