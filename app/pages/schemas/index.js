@@ -1,21 +1,14 @@
+const {fields, config} = require('../settings')
+const Helper = require('../../../helpers')
 module.exports = (sequelize, DataTypes) => {
     const CommonModel = require('./../../../core/schemas/CommonSchema')(sequelize, DataTypes)
-    const Pages = sequelize.define("pages", {
+    const data = Helper.createSchemas(fields, DataTypes)
+    const Pages = sequelize.define(config.mainDb, {
             ...CommonModel,
-            post_type: {
-                type: DataTypes.STRING,
-                defaultValue: 'static-pages'
-            },
-            slug: {
-                type: DataTypes.STRING,
-                defaultValue: 'static-pages'
-            },
-            faq: {
-                type: DataTypes.TEXT
-            }
+            ...data
         },
         {
-            tableName: 'pages',
+            tableName: config.mainDb,
             timestamps:false
         })
     return Pages

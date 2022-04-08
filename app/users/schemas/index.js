@@ -1,22 +1,12 @@
+const {fields, config} = require('../settings')
+const Helper = require('../../../helpers')
 module.exports = (sequelize, DataTypes) => {
-    const Users = sequelize.define("users", {
-            name: {
-                type: DataTypes.STRING,
-                unique: true
-            },
-            email: {
-                type: DataTypes.STRING,
-                unique: true
-            },
+    const data = Helper.createSchemas(fields, DataTypes)
+    const Model = sequelize.define(config.mainDb, {
+            ...data,
             role: {
                 type: DataTypes.ENUM(['admin', 'editor', 'guest']),
                 defaultValue: 'editor'
-            },
-            password: {
-                type: DataTypes.STRING
-            },
-            remember_token: {
-                type: DataTypes.STRING
             },
             updated_at: {
                 type: DataTypes.DATE,
@@ -28,8 +18,8 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         {
-            tableName: 'users',
-            timestamps:false
+            tableName: config.mainDb,
+            timestamps: false
         })
-    return Users
+    return Model
 }
