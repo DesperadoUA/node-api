@@ -16,8 +16,11 @@ const config = {
     relatives: {
         casino: {
             relativePostType: 'CASINO',
-            key: 'casino', // /core/models/tableName.js GAME.relative.casino
-            responseKey: 'game_casino'
+            key: 'casino', 
+            responseKey: 'game_casino',
+            table: tableName[table].relative.casino,
+            mainDb: tableName[table].main,
+            relativeDb: tableName.CASINO.main
         }
     }
 }

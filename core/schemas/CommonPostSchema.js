@@ -1,6 +1,5 @@
-const {config} = require('../settings')
-module.exports = (sequelize, DataTypes) => {
-    const CommonModel = require('./../../../core/schemas/CommonSchema')(sequelize, DataTypes)
+module.exports = (config, sequelize, DataTypes) => {
+    const CommonModel = require('./CommonSchema')(sequelize, DataTypes)
     const Post = sequelize.define(config.mainDb, {
             ...CommonModel,
             post_type: {

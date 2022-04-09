@@ -4,6 +4,7 @@ const cors = require('cors')
 const path = require('path')
 const bodyParser = require('body-parser')
 const fs = require('fs')
+const HelperApp = require('./helpers/app')
 
 const PORT = process.env.PORT || 5000
 const app = express()
@@ -16,10 +17,7 @@ app.use(cors())
 global.cash = {}
 
 function initControllers(){
-  const arrDir = fs.readdirSync(process.env.APP_DIR, { withFileTypes: true })
-                   .filter(d => d.isDirectory())
-                   .map(d => d.name)
-
+  const arrDir = HelperApp.getAppDir()
   arrDir.forEach(dir => {
     const filePath = `${process.env.APP_DIR}/${dir}/controller.js`
     if (fs.existsSync(filePath)) { 

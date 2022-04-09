@@ -4,6 +4,7 @@ const Sequilize = require("sequelize")
 const {DataTypes} = Sequilize
 const fs = require('fs')
 const path = require('path')
+const HelperApp = require('./../../helpers/app')
 
 const sequelize = new Sequilize(dbConfig[process.env.NODE_ENV].DB, dbConfig[process.env.NODE_ENV].USER, dbConfig[process.env.NODE_ENV].PASSWORD, {
     dialect: dbConfig[process.env.NODE_ENV].DIALECT,
@@ -23,9 +24,7 @@ db.Sequilize = Sequilize
 db.sequelize = sequelize
 
 function initDb(){
-    const arrDir = fs.readdirSync(process.env.APP_DIR, { withFileTypes: true })
-                     .filter(d => d.isDirectory())
-                     .map(d => d.name)
+    const arrDir = HelperApp.getAppDir()
     arrDir.forEach(dir => {
       const filePath =  path.resolve(__dirname, `./../.${process.env.APP_DIR}/${dir}/schemas/initial.js`)
       if (fs.existsSync(filePath)) {
@@ -35,11 +34,19 @@ function initDb(){
     })
   }
 initDb()
-//--- Game start ---//
-db.gameCasinoRelatives = require('./../../app/game/schemas/casino_relatives')(sequelize, DataTypes)
-db.games.belongsToMany(db.casinos, {through: 'game_casino_relatives', foreignKey: 'post_id', onDelete: 'CASCADE'})
-db.casinos.belongsToMany(db.games, {through: 'game_casino_relatives', foreignKey: 'relative_id', onDelete: 'CASCADE'}) 
-//--- Games End ----//
+
+function initRelativeDb(){
+  const arrDir = HelperApp.getAppDir()
+  arrDir.forEach(dir => {
+    const Relatives = HelperApp.getRelatives(dir)
+    for(key in Relatives) {
+      db[Relatives[key].table] = require('./../../core/schemas/CommonRelativeSchema')(Relatives[key].table, sequelize, DataTypes)
+      db[Relatives[key].mainDb].belongsToMany(db.casinos, {through: Relatives[key].table, foreignKey: 'post_id', onDelete: 'CASCADE'})
+      db[Relatives[key].relativeDb].belongsToMany(db.games, {through: Relatives[key].table, foreignKey: 'relative_id', onDelete: 'CASCADE'}) 
+    }
+  })
+}
+initRelativeDb()
 
 db.sequelize.sync({force:dbConfig[process.env.NODE_ENV].SYNC})
     .then(()=>{

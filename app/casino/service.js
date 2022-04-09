@@ -7,7 +7,6 @@ const config = require('../../config')
 const TABLE = settings.config.table
 const Helper = require('../../helpers')
 const fields = settings.fields
-const relatives = settings.config.relatives
 
 class Service extends BaseService {
     static async getPublicPostByUrl(url) {
@@ -108,6 +107,10 @@ class Service extends BaseService {
             err.push(relative.confirm)
             response.body.category = relative.data.category
 
+            const relatives = settings.config.relatives
+            for(let key in relatives) {
+                response.body[relatives[key].responseKey] = relative.data[relatives[key].responseKey]
+            }
             response.confirm = err.includes('error') ? 'error' : 'ok'
         }
         return response
@@ -173,6 +176,13 @@ class Service extends BaseService {
         const categoryRelative = await this.getCategoryAdmin(data, TABLE)
         err.push(categoryRelative.confirm)
         response.data.category = categoryRelative.data
+        
+        const relatives = settings.config.relatives
+        for(let key in relatives) {
+            const Relative = await this.getSingleRelativeAdmin(data, TABLE, relatives[key].relativePostType, relatives[key].key)
+            err.push(Relative.confirm)
+            response.data[relatives[key].responseKey] = Relative.data
+        }
 
         response.confirm = err.includes('error') ? 'error' : 'ok'
         return response
@@ -189,8 +199,9 @@ class Service extends BaseService {
         //----------------------------------------------------------------------------//
 
         //--------------- Posts -----------------------------------------------------//
+        const relatives = settings.config.relatives
         for(let key in relatives) {
-            const updateRelative = await this.updateSingleRelative(data, TABLE, relatives[key].key, relatives[key].responseKey)
+            const updateRelative = await this.updateSingleRelative(data, TABLE, relatives[key].relativePostType, relatives[key].key, relatives[key].responseKey)
             err.push(updateRelative.confirm)
         }
         //--------------------------------------------------------------------------//
