@@ -41,8 +41,8 @@ function initRelativeDb(){
     const Relatives = HelperApp.getRelatives(dir)
     for(key in Relatives) {
       db[Relatives[key].table] = require('./../../core/schemas/CommonRelativeSchema')(Relatives[key].table, sequelize, DataTypes)
-      db[Relatives[key].mainDb].belongsToMany(db.casinos, {through: Relatives[key].table, foreignKey: 'post_id', onDelete: 'CASCADE'})
-      db[Relatives[key].relativeDb].belongsToMany(db.games, {through: Relatives[key].table, foreignKey: 'relative_id', onDelete: 'CASCADE'}) 
+      db[Relatives[key].mainDb].belongsToMany(db[Relatives[key].relativeDb], {through: Relatives[key].table, foreignKey: 'post_id', onDelete: 'CASCADE'})
+      db[Relatives[key].relativeDb].belongsToMany(db[Relatives[key].mainDb], {through: Relatives[key].table, foreignKey: 'relative_id', onDelete: 'CASCADE'})  
     }
   })
 }
