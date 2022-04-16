@@ -6,6 +6,7 @@ const config = {
     postTypeCategory: 'game/category',
     postTypeCategorySlug: 'games',
     orderKey: ['created_at', 'updated_at'], /* Key for sort */
+    keySort: 'created_at',
     table: table, /* For config tableName */
     mainDb: tableName[table].main,           // Naming for Shemas (core shemas)
     metaDb: tableName[table].meta,
