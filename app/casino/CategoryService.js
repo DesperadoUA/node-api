@@ -4,8 +4,8 @@ const RelativeModel = require('../../core/models/Relative')
 const CardBuilder =  require('./CardBuilder')
 const BaseService =  require('../../core/BaseService')
 const store = require('../../store')
-const config = require('../../config')
 const settings = require('./settings')
+const config = settings.config
 
 const TABLE = settings.config.table
 const LIMIT_RELATIVE = 10000
@@ -73,7 +73,7 @@ class Service extends BaseService {
             confirm: 'ok',
             body: [],
             total: 0,
-            lang: config.LANG[settings.lang]
+            lang: _LANG[settings.lang]
         }
         const err = []
         const categoryModel = new CategoryModel(TABLE)
