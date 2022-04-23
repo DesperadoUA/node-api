@@ -1,7 +1,7 @@
 const PostModel = require('./models')
 const CardBuilder =  require('./CardBuilder')
 const BaseService =  require('../../core/BaseService')
-const store = require('../../core/store')
+const store = require('../../store')
 const config = require('../../config')
 
 class Service extends BaseService {
